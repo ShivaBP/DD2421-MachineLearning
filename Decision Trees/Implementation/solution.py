@@ -99,6 +99,7 @@ def plotPruneAccuracy(dataset , test ):
         if (d.check(prune , test )  > bestFractionScore):
             bestFractionScore = d.check(prune , test )  
             bestFraction = fraction
+
     plt.xlabel("Fraction")
     plt.ylabel("Classification Accuracy score on a test set")
     plt.title("Classisfication accuracy of the pruned tree on test data as a function of partitioning fraction")
@@ -106,6 +107,23 @@ def plotPruneAccuracy(dataset , test ):
     
     print("Best partitioning fraction: ", bestFraction , "\n")
     print("Fraction score: ", bestFractionScore, "\n")
+    return fractionResults
+
+def statistics(results):
+    print("Statistical computation results" , "\n")
+    sum = 0
+    for result in results:
+        sum = sum + result 
+    
+    mean = sum / len(results)
+
+    variance= 0
+    for result in results:
+        localVariance =  (result - mean)**2
+        variance = variance + localVariance
+    
+    print("Mean:    ", mean, "\n")
+    print("Variance ", variance , "\n")
 
 
 def run():
@@ -114,9 +132,15 @@ def run():
    informationGainCalculation()
    buildTree(False)
    print("Monk1", "\n")
-   plotPruneAccuracy(m.monk1 , m.monk1test)
+   monk1Results = plotPruneAccuracy(m.monk1 , m.monk1test)
+   statistics(monk1Results)
+
+   print()
+
    print("Monk3", "\n")
-   plotPruneAccuracy(m.monk3 , m.monk3test)
+   monk3Results = plotPruneAccuracy(m.monk3 , m.monk3test)
+   statistics(monk3Results)
+   
 
     
 if __name__ == '__main__':
