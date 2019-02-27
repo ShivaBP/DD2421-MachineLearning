@@ -120,8 +120,6 @@ def classifyBayes(X, prior, mu, sigma):
 
 
 # The implemented functions can now be summarized into the `BayesClassifier` class, which we will use later to test the classifier, no need to add anything else here:
-
-
 # NOTE: no need to touch this
 class BayesClassifier(object):
     def __init__(self):
